@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Kanit', sans-serif;
+}
+
+body{
+    background-image: url("wooden-background-002.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    background-position: center;
+
+}
+
+header{
+    background-color: rgb(111, 52, 129);
+    opacity: 0.92;
+    box-shadow: 2px 0 10px 1px;
+}
+h1{
+    font-size: clamp(2rem, 0.1rem + 10vw , 2.5rem);
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    text-align: center;
+    padding: 1rem;
+    color: white;
+    text-shadow: 1px 1px 25px black;
+}
+
+#main-grid{
+    width: calc(0.1rem + 45vh);
+    min-height  : calc(0.1rem + 45vh);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    margin-inline: auto;
+    margin-top: 1.5rem;
+    
+}
+
+.grid-items{
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(2.2rem, 0.1rem + 10vh , 4rem);
+    /* font-family: 'Caveat', cursive;
+    font-family: 'Kalam', cursive; */
+    color: rgb(98, 41, 116);
+}
+
+#turn-prompt{
+    font-size: clamp(1.2rem, 0.1rem + 2vw , 1.5rem);
+    width: calc(1rem + 25vw);
+    margin-inline: auto;
+    margin-block: 0.5em;
+    text-align: center;
+}
+
+#reset{
+    display: block;
+    font-size: 1.15rem;
+    padding: 0.5em 1.2em;
+    background-color: rgb(98, 41, 116);
+    color: white;
+    border-radius: 0.8em;
+    margin: auto;
+
+}
+#reset:hover{
+    cursor: pointer;
+}
+
+@media (min-height: 600px){
+    #main-grid{
+        width: calc(0.1rem + 35vh);
+        min-height  : calc(0.1rem + 35vh);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        margin: 1em auto;
+        
+        
+    }
+}
+
+/* Utility classes */
+
+.top{
+    border-top: none;
+}
+.right{
+    border-right: none;
+}
+.bottom{
+    border-bottom: none;
+}
+.left{
+    border-left: none;
+}
