@@ -5,9 +5,9 @@ let myTurn = "X";
 let isgameover = false;
 let audioTurn = new Audio("ting.mp3");
 let gameOver = new Audio("gameover.mp3");
+let isDraw = false;
 
 // Functions
-
 // Change Turn 
 function changeTurn() {
     return myTurn === "X" ? "0" : "X"
@@ -24,33 +24,44 @@ function checkWin() {
         [2,5,8],
         [0,4,8],
         [2,4,6]
-    ];
+    ];   
+    let win = 0;
     winCombo.forEach(e =>{
         if((myBoxes[e[0]].innerHTML === myBoxes[e[1]].innerHTML) && (myBoxes[e[2]].innerHTML === myBoxes[e[1]].innerHTML) && (myBoxes[e[0]].innerHTML !== "")){
             myBoxes[e[0]].style.backgroundColor = "rgb(253, 222, 253, 0.7)";
             myBoxes[e[1]].style.backgroundColor = "rgb(253, 222, 253, 0.7)";
             myBoxes[e[2]].style.backgroundColor = "rgb(253, 222, 253, 0.7)";
-            isgameover = true;
             Array.from(myBoxes).forEach(element => {
                 // This removes event listener onclick so that the user cannot continue to play even after winning
                 element.removeEventListener("click", clickAndCheck)
             })
             gameOver.play();
-        }
+            win = 1;
+        }     
     })
+    if (win === 1){
+        return true
+    }else{
+        return false
+    }
 }
 
 // Function for onclick listener to add X or 0 whenever a user clicks on the box
 function clickAndCheck(e) {
     e.target.innerHTML = myTurn;
     audioTurn.play();
-    checkWin();
-    if (isgameover) {
-        msgPrompt.innerHTML = myTurn + " Won!"
+    isgameover = checkWin();
+    // console.log("G: " + isgameover);
+    isDraw = checkDraw();
+    // console.log("D: " + isDraw);
+    if (isgameover === true) {
+        msgPrompt.innerHTML = myTurn + " Won!";
     }
-    else {
+    else if(isgameover === false && isDraw === false) {
         myTurn = changeTurn();
         msgPrompt.innerHTML = "Turn: " + myTurn;
+    }else{
+        msgPrompt.innerHTML = "Game Draw!";
     }
 }
 
@@ -63,6 +74,20 @@ function toAddEventsOnCLick(){
 
 toAddEventsOnCLick();
 
+// Function to check draw
+function checkDraw(){
+    let countDraw = 0;
+    Array.from(myBoxes).forEach(element =>{
+        if (element.innerHTML !== ""){
+            countDraw++ ;
+        }
+    })
+    if (countDraw === 9){
+        return true
+    } else{
+        return false
+    }
+}
 resetBtn.addEventListener("click", function () {
     Array.from(myBoxes).forEach(element => {
         element.innerHTML = "";
