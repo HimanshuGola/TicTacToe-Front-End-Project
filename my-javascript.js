@@ -31,27 +31,37 @@ function checkWin() {
             myBoxes[e[1]].style.backgroundColor = "rgb(253, 222, 253, 0.7)";
             myBoxes[e[2]].style.backgroundColor = "rgb(253, 222, 253, 0.7)";
             isgameover = true;
+            Array.from(myBoxes).forEach(element => {
+                // This removes event listener onclick so that the user cannot continue to play even after winning
+                element.removeEventListener("click", clickAndCheck)
+            })
             gameOver.play();
         }
     })
 }
 
-// Event Listeners
+// Function for onclick listener to add X or 0 whenever a user clicks on the box
+function clickAndCheck(e) {
+    e.target.innerHTML = myTurn;
+    audioTurn.play();
+    checkWin();
+    if (isgameover) {
+        msgPrompt.innerHTML = myTurn + " Won!"
+    }
+    else {
+        myTurn = changeTurn();
+        msgPrompt.innerHTML = "Turn: " + myTurn;
+    }
+}
 
-Array.from(myBoxes).forEach(element => {
-    element.addEventListener("click", function () {
-        element.innerHTML = myTurn;
-        audioTurn.play();
-        checkWin();
-        if (isgameover) {
-            msgPrompt.innerHTML = myTurn + " Won!"
-        }
-        else {
-            myTurn = changeTurn();
-            msgPrompt.innerHTML = "Turn: " + myTurn;
-        }
-    })
+// This function adds event listener for clicks on boxes 
+function toAddEventsOnCLick(){
+    Array.from(myBoxes).forEach(element => {
+    element.addEventListener("click", clickAndCheck, {once:true});
 })
+}
+
+toAddEventsOnCLick();
 
 resetBtn.addEventListener("click", function () {
     Array.from(myBoxes).forEach(element => {
@@ -59,5 +69,7 @@ resetBtn.addEventListener("click", function () {
         element.style.backgroundColor = "rgb(255, 255, 255, 0)";
         msgPrompt.innerHTML = "Turn: " + myTurn
         isgameover = false;
+        toAddEventsOnCLick();
+        // The above line again adds event listener to all the boxes after a reset since once:true is used in the function toAddEventsOnClick
     })
 })

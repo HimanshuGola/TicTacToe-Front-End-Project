@@ -38,7 +38,7 @@ h1{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     margin-inline: auto;
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     
 }
 
@@ -82,7 +82,7 @@ h1{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        margin: 1em auto;
+        margin: 2.5em auto;
         
         
     }
